@@ -3,9 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:staging": "NUXT_APP_BASE_URL=/moodmapper/  NUXT_ENV=staging nuxt build",
-    "build:production": "NUXT_APP_BASE_URL=/moodmapper/  NUXT_ENV=production nuxt build",
-    "dev": "NUXT_ENV=development  nuxt dev  --dotenv .env.development",
+    "build:staging": "NUXT_APP_BASE_URL=/moodmapper/ NUXT_ENV=staging nuxt generate",
+    "build:production": "NUXT_APP_BASE_URL=/moodmapper/ NUXT_ENV=production nuxt generate",
+    "dev": "NUXT_ENV=development nuxt dev --dotenv .env.development",
     "dev-certs": "sudo ./certs.sh",
     "generate": "NUXT_APP_BASE_URL=/moodmapper/ nuxt generate",
     "preview": "nuxt preview",

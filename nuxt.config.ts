@@ -1,7 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-import { resolve } from "path";
-
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: {
@@ -11,6 +9,7 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
+
   devServer: {
     https: {
       key: "./certs/memorymark-dev.key",
@@ -20,9 +19,9 @@ export default defineNuxtConfig({
   imports: {
     autoImport: true,
   },
-  typescript: {
-    tsConfig: {
-    },
+
+  app: {
+    baseURL: "/moodmapper/",
   },
 
   // allows nuxt to consume the .env files for the api
@@ -31,5 +30,4 @@ export default defineNuxtConfig({
       apiBase: "",
     },
   },
-
 });

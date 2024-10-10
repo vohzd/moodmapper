@@ -1,0 +1,15 @@
+{
+  // Extend the Nuxt-generated TypeScript configuration
+  "extends": ["./.nuxt/tsconfig.json"],
+
+  "compilerOptions": {
+    // Ensure the base URL is set correctly
+    "baseUrl": ".",
+  }
+
+  // Include all TypeScript files in the current package
+  // "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
+
+  // Exclude node_modules and .nuxt directory
+  // "exclude": ["node_modules", ".nuxt", "dist"]
+}

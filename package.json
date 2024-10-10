@@ -1,0 +1,19 @@
+{
+  "name": "moodmapper",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:staging": "NUXT_ENV=staging nuxt build",
+    "build:production": "NUXT_ENV=production nuxt build",
+    "dev": "NUXT_ENV=development  nuxt dev  --dotenv .env.development",
+    "dev-certs": "sudo ./certs.sh",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "nuxt": "^3.13.2",
+    "vue": "latest"
+  },
+  "version": "2024-08"
+}

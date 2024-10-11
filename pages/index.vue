@@ -14,7 +14,7 @@
       </div>
 
       <div class="mood-input">
-        <h3>How's your vibe?</h3>
+        <h3>How are you feeling today?</h3>
         <div class="slider-container">
           <input type="range" id="mood" name="mood" step="1" min="1" max="10" v-model="mood" />
           <div class="mood-emoji-track">

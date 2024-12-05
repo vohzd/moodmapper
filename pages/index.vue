@@ -23,6 +23,10 @@
             </div>
           </div>
         </div>
+        <div class="notes-input">
+          <label for="notes">Add notes (optional):</label>
+          <textarea id="notes" v-model="currentNote" placeholder="How was your day? What made you feel this way?" rows="3"></textarea>
+        </div>
         <button class="submit-btn" @click="saveMood" :disabled="isSubmitting">
           {{ isSubmitting ? "Saving..." : "Capture Mood" }}
         </button>
@@ -38,6 +42,7 @@
                 <strong>Mood: {{ entry.mood }}</strong>
                 <br />
                 <small>{{ getRelativeTime(entry.timestamp) }}</small>
+                <p v-if="entry.notes" class="entry-notes">{{ entry.notes }}</p>
               </span>
             </div>
             <button class="delete-btn" @click="deleteMoodEntry(index)" aria-label="Delete entry">&times;</button>
@@ -54,12 +59,14 @@ import { computed, onMounted, ref, watch } from "vue";
 interface MoodEntry {
   mood: number;
   timestamp: string;
+  notes?: string;
 }
 
 const mood = defineModel<number>();
 mood.value = 5; // Start at neutral mood
 
 const moodEntries = ref<MoodEntry[]>([]);
+const currentNote = ref("");
 const isSubmitting = ref(false);
 const isDarkMode = ref(false);
 const isLoading = ref(true);
@@ -79,11 +86,13 @@ const saveMood = async (): Promise<void> => {
   const newEntry: MoodEntry = {
     mood: mood.value,
     timestamp: new Date().toISOString(),
+    notes: currentNote.value.trim() || undefined,
   };
   // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 500));
   moodEntries.value.unshift(newEntry);
   localStorage.setItem("moodEntries", JSON.stringify(moodEntries.value));
+  currentNote.value = ""; // Clear the notes input
   isSubmitting.value = false;
 };
 
@@ -486,5 +495,56 @@ input[type="range"]::-moz-range-thumb {
 .list-leave-to {
   opacity: 0;
   transform: translateX(30px);
+}
+
+.notes-input {
+  margin-bottom: 20px;
+}
+
+.notes-input label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--secondary-color);
+  font-weight: 500;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--text-light);
+  font-family: inherit;
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+.dark-mode textarea {
+  background-color: rgba(41, 47, 54, 0.9);
+  color: var(--text-dark);
+  border-color: var(--primary-color);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 5px rgba(230, 100, 40, 0.3);
+}
+
+.entry-notes {
+  margin: 8px 0 0 0;
+  font-size: 0.9em;
+  line-height: 1.4;
+  color: var(--text-light);
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 3px solid var(--secondary-color);
+}
+
+.dark-mode .entry-notes {
+  color: var(--text-dark);
+  background-color: rgba(41, 47, 54, 0.6);
 }
 </style>

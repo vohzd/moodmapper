@@ -12,8 +12,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "apexcharts": "^4.1.0",
     "nuxt": "^3.13.2",
-    "vue": "latest"
+    "vue": "latest",
+    "vue3-apexcharts": "^1.8.0"
   },
   "version": "2024-08"
 }
